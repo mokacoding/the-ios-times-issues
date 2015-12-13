@@ -21,25 +21,25 @@ Let's see how to use this library.
 
 ```swift
 func presentSimplePermissionsAlert() {
-	let permissionScope = PermissionScope()
+  let permissionScope = PermissionScope()
 
-	// Set up permissions
-	permissionScope.addPermission(ContactsPermission(),
-		message: "This way it is going to be easier to find your friends"
-	)
-	permissionScope.addPermission(NotificationsPermission(notificationCategories: nil),
-		message: "So that we can send you the latests updates straightaway"
-	)
+  // Set up permissions
+  permissionScope.addPermission(ContactsPermission(),
+    message: "This way it is going to be easier to find your friends"
+  )
+  permissionScope.addPermission(NotificationsPermission(notificationCategories: nil),
+    message: "So that we can send you the latests updates straightaway"
+  )
 
-	// Show permission dialog with callbacks
-	permissionScope.show(
-		{ finished, results in
-			print("Permissions state changed, results: \(results)")
-		},
-		cancelled: { results in
-			print("User closed the permission alert, results: \(results)")
-		}
-	)
+  // Show permission dialog with callbacks
+  permissionScope.show(
+    { finished, results in
+      print("Permissions state changed, results: \(results)")
+    },
+    cancelled: { results in
+      print("User closed the permission alert, results: \(results)")
+    }
+  )
 }
 ```
 
@@ -55,18 +55,18 @@ Showing an alert is not the only way you have to request the user for permission
 
 ```swift
 func togglePhotosPermissions(basedOnSwitch switch: UISwitch) {
-	if switch.on {
-		// turn on photos access
-		if PermissionScope().statusPhotos() == .Authorized {
-			print("Photos have been already authorized")
-		} else {
-			print("Photos need to be reauthorized")
-			PermissionScope().requestPhotos()
-		}
-	} else {
-		// turn off notifications
-		print("Photos need to be de-authorized")
-	}
+  if switch.on {
+    // turn on photos access
+    if PermissionScope().statusPhotos() == .Authorized {
+      print("Photos have been already authorized")
+    } else {
+      print("Photos need to be reauthorized")
+      PermissionScope().requestPhotos()
+    }
+  } else {
+    // turn off notifications
+    print("Photos need to be de-authorized")
+  }
 }
 ```
 
